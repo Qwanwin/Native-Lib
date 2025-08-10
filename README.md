@@ -1,33 +1,16 @@
 # Discussing SO Protection from a Reverse Perspective  
 *Written by @Qwanwin*  
 
-## 1. Introduction  
+##  Introduction  
 As an Android reverse engineer, a large part of our work involves analyzing **.so files**.  
 These shared libraries often contain core logic and sensitive data, making them valuable targets.  
 Plaintext strings and function names in particular can be critical vulnerabilities.  
 
 From an attacker's perspective, improving `.so` file protection is key.  
 Here are practical solutions â€” requiring minimal coding â€” that can significantly improve security standards.  
-> **Note:** This content assumes familiarity with Android NDK development.  
-
----
-
-## 2. Threat Model  
-Before discussing countermeasures, itâ€™s important to define the *threat landscape*:  
-
-- **Attackerâ€™s capabilities**:  
-  - Full APK access (can extract and inspect `.so`).  
-  - Can run dynamic analysis tools (Frida, Xposed, Ghidra, IDA, objdump).  
-  - Can attach a debugger or patch memory.  
-
-- **Goal of protection**:  
-  - Make reverse engineering more expensive and time-consuming.  
-  - Delay or discourage attackers.  
-
----
-
-## 3. Compiler-Level Protections  
-
+> **Note:** This content assumes familiarity with Android NDK development.
+>
+> 
 ### 3.1 Code Obfuscation (O-LLVM)  
 - **Control Flow Flattening** â€“ Complex jump logic disrupts static analysis.  
 - **Instruction Substitution** â€“ Replace simple instructions with complex but equivalent operations.  
@@ -62,7 +45,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -fno-rtti -fno-exception
 #define INTERNAL_FUNC __attribute__((visibility("hidden")))
 ```
 
----
+
 
 ## 4. String Protection Techniques  
 
@@ -91,7 +74,7 @@ Remove or disable `LOGE`/`LOGD` output in release builds.
 ### 4.5 Key Protection  
 Consider **white-box cryptography** for high-value keys.  
 
----
+
 
 ## 5. Runtime Protections  
 
@@ -107,7 +90,7 @@ Consider **white-box cryptography** for high-value keys.
 ### 5.3 JNI Function Name Obfuscation  
 - Use `RegisterNatives()` to register native methods dynamically.  
 
----
+
 
 ## 6. Advanced Protections  
 
@@ -123,7 +106,7 @@ Consider **white-box cryptography** for high-value keys.
 - Measure execution timing to detect breakpoints.  
 - Detect environment variable changes (`LD_LIBRARY_PATH`, `LD_PRELOAD`).  
 
----
+
 
 ## 7. Multi-Layer Protection Flow  
 
@@ -137,7 +120,7 @@ graph TD
     C -->|String Decryption, Anti-Hook| D
 ```
 
----
+
 
 ## 8. Strategic Considerations  
 
@@ -149,10 +132,10 @@ graph TD
 | Stability     | Poor obfuscation may cause crashes |
 | Compatibility | Must run on high-, mid-, and low-end devices |
 
----
+
 
 ## 9. Conclusion  
 Even major vendors often use *moderate* SO protection â€” not due to lack of capability, but to maintain stability, compatibility, and performance.  
 A balanced approach between **security, stability, and performance** is key.  
 
----
+
