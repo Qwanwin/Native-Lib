@@ -10,8 +10,6 @@ Bahasnya santai aja, tapi isinya tetap teknis dan bisa langsung dipraktekin.
 
 > Ingat: proteksi itu nggak ada yang 100% aman. Target kita cuma bikin si pembongkar mikir dua kali dan butuh waktu lebih lama.
 
----
-
 ## 2. Proteksi Waktu Kompilasi (Compile-Time)  
 
 ### 2.1 Obfuscasi C/C++ pakai O-LLVM  
